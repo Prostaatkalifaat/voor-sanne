@@ -255,21 +255,15 @@
 
         /* --- Steak glow --- */
         .steak-visual {
-            width: clamp(120px, 30vw, 160px);
-            height: clamp(120px, 30vw, 160px);
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #8b4513, #5c2e0e, #3a1a00);
-            box-shadow:
-                0 0 60px rgba(201, 168, 124, 0.2),
-                inset 0 -20px 40px rgba(0,0,0,0.5),
-                inset 0 10px 20px rgba(255,200,150,0.1);
+            font-size: clamp(5rem, 15vw, 8rem);
+            filter: drop-shadow(0 0 40px rgba(201, 168, 124, 0.3));
             animation: steak-glow 3s ease-in-out infinite alternate;
             margin: 1.2rem 0;
         }
 
         @keyframes steak-glow {
-            from { box-shadow: 0 0 40px rgba(201, 168, 124, 0.15), inset 0 -20px 40px rgba(0,0,0,0.5); }
-            to { box-shadow: 0 0 80px rgba(201, 168, 124, 0.35), inset 0 -20px 40px rgba(0,0,0,0.5); }
+            from { filter: drop-shadow(0 0 30px rgba(201, 168, 124, 0.2)); }
+            to { filter: drop-shadow(0 0 60px rgba(201, 168, 124, 0.5)); }
         }
 
         /* --- Confetti --- */
@@ -471,7 +465,7 @@
             <div class="label">de belofte</div>
         </div>
         <div class="anim" data-delay="300">
-            <div class="steak-visual"></div>
+            <div class="steak-visual">🥩</div>
         </div>
         <div class="anim" data-delay="600">
             <h2>Die <span class="gold">biefstuk</span></h2>
