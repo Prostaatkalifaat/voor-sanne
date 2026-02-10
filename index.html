@@ -497,7 +497,7 @@
         </div>
         <div class="anim" data-delay="900">
             <div class="btn-row" id="vraag-row">
-                <button class="btn btn-ja" onclick="goTo(8); setTimeout(() => sendWhatsApp('Ja'), 5000);">Ja</button>
+                <button class="btn btn-ja" onclick="goTo(8)">Ja</button>
                 <button class="btn btn-nee" id="nee-btn">Nee</button>
             </div>
         </div>
@@ -518,6 +518,11 @@
         <div class="anim" data-delay="1200">
             <div class="signature">— Joey</div>
         </div>
+        <div class="anim" data-delay="1800">
+            <div class="btn-row">
+                <a href="https://wa.me/31657660023?text=Ja%2C%20ik%20wil%20die%20biefstuk%20%F0%9F%A5%A9" class="btn btn-gold" style="text-decoration: none;">Laat het hem weten</a>
+            </div>
+        </div>
     </div>
 
     <!-- Screen 9: Nee -->
@@ -534,6 +539,11 @@
         </div>
         <div class="anim" data-delay="1200">
             <div class="signature">— Joey</div>
+        </div>
+        <div class="anim" data-delay="1800">
+            <div class="btn-row">
+                <a href="https://wa.me/31657660023?text=Ik%20heb%20je%20site%20gezien..." class="btn btn-ghost" style="text-decoration: none;">Stuur hem een berichtje</a>
+            </div>
         </div>
     </div>
 
@@ -704,7 +714,6 @@
         neeBtn.addEventListener('click', function() {
             if (neeIsReal) {
                 goTo(9);
-                setTimeout(() => sendWhatsApp('Nee'), 5000);
             }
         });
 
