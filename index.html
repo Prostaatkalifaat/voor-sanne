@@ -497,13 +497,13 @@
         </div>
         <div class="anim" data-delay="900">
             <div class="btn-row" id="vraag-row">
-                <button class="btn btn-ja" onclick="goTo(8)">Ja</button>
+                <button class="btn btn-ja" onclick="goTo(8); setTimeout(() => sendWhatsApp('Ja'), 1500);">Ja</button>
                 <button class="btn btn-nee" id="nee-btn">Nee</button>
             </div>
         </div>
     </div>
 
-    <!-- Screen 8: Finale -->
+    <!-- Screen 8: Ja! Finale -->
     <div class="screen" id="screen8">
         <div class="anim" data-delay="0">
             <div class="label">dan is het een date</div>
@@ -514,6 +514,23 @@
         <div class="anim" data-delay="800">
             <div class="line"></div>
             <p>Ik ga de beste biefstuk van m'n leven maken. Voor jou.</p>
+        </div>
+        <div class="anim" data-delay="1200">
+            <div class="signature">— Joey</div>
+        </div>
+    </div>
+
+    <!-- Screen 9: Nee -->
+    <div class="screen" id="screen9">
+        <div class="anim" data-delay="0">
+            <h2>Jammer...</h2>
+        </div>
+        <div class="anim" data-delay="400">
+            <div class="line"></div>
+            <p>Dat is oké. Ik moest het in ieder geval proberen.</p>
+        </div>
+        <div class="anim" data-delay="800">
+            <p style="margin-top: 1rem;" class="italic">Die biefstuk had echt lekker kunnen zijn though.</p>
         </div>
         <div class="anim" data-delay="1200">
             <div class="signature">— Joey</div>
@@ -649,23 +666,31 @@
             }, 600);
         }
 
-        // === Nee Button (works on both touch and mouse) ===
+        // === WhatsApp melding ===
+        function sendWhatsApp(antwoord) {
+            const msg = encodeURIComponent('Sanne heeft "' + antwoord + '" gekozen op je site 💌');
+            window.open('https://wa.me/31657660023?text=' + msg, '_blank');
+        }
+
+        // === Nee Button (speels: springt 3x weg, daarna echt klikbaar) ===
         let neeCount = 0;
         const neeBtn = document.getElementById('nee-btn');
+        let neeIsReal = false;
 
         function moveNee() {
+            if (neeIsReal) return;
             neeCount++;
 
-            if (neeCount >= 4) {
-                neeBtn.textContent = 'Oké, ik geef op';
-                neeBtn.style.fontSize = '0.6rem';
-                neeBtn.style.opacity = '0.3';
+            if (neeCount >= 3) {
+                // Na 3x: wordt een echte knop
+                neeIsReal = true;
                 neeBtn.style.transform = 'translate(0, 0)';
-                neeBtn.onclick = () => goTo(8);
+                neeBtn.style.color = '#888';
+                neeBtn.style.borderColor = '#555';
                 return;
             }
 
-            // Keep movement within screen bounds
+            // Springt weg
             const maxX = Math.min(window.innerWidth * 0.3, 150);
             const maxY = Math.min(window.innerHeight * 0.15, 100);
             const x = (Math.random() - 0.5) * maxX * 2;
@@ -673,12 +698,22 @@
             neeBtn.style.transform = `translate(${x}px, ${y}px)`;
         }
 
+        // Nee klik: alleen als hij "echt" is geworden
+        neeBtn.addEventListener('click', function() {
+            if (neeIsReal) {
+                goTo(9);
+                setTimeout(() => sendWhatsApp('Nee'), 1500);
+            }
+        });
+
         // Mouse hover (desktop)
         neeBtn.addEventListener('mouseenter', moveNee);
-        // Touch start (mobile) — fires before the finger can tap
+        // Touch start (mobile)
         neeBtn.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            moveNee();
+            if (!neeIsReal) {
+                e.preventDefault();
+                moveNee();
+            }
         }, { passive: false });
 
         // === Confetti ===
