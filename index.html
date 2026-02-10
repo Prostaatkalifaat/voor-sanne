@@ -668,7 +668,9 @@
 
         // === WhatsApp melding ===
         function sendWhatsApp(antwoord) {
-            const msg = encodeURIComponent('Sanne heeft "' + antwoord + '" gekozen op je site 💌');
+            const msg = antwoord === 'Ja'
+                ? encodeURIComponent('Ja, ik wil die biefstuk 🥩')
+                : encodeURIComponent('Ik heb je site gezien...');
             window.open('https://wa.me/31657660023?text=' + msg, '_blank');
         }
 
