@@ -497,7 +497,7 @@
         </div>
         <div class="anim" data-delay="900">
             <div class="btn-row" id="vraag-row">
-                <button class="btn btn-ja" onclick="goTo(8); setTimeout(() => sendWhatsApp('Ja'), 1500);">Ja</button>
+                <button class="btn btn-ja" onclick="goTo(8); setTimeout(() => sendWhatsApp('Ja'), 5000);">Ja</button>
                 <button class="btn btn-nee" id="nee-btn">Nee</button>
             </div>
         </div>
@@ -704,7 +704,7 @@
         neeBtn.addEventListener('click', function() {
             if (neeIsReal) {
                 goTo(9);
-                setTimeout(() => sendWhatsApp('Nee'), 1500);
+                setTimeout(() => sendWhatsApp('Nee'), 5000);
             }
         });
 
